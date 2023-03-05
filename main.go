@@ -4,18 +4,20 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/vbrenister/go-rest-example/api/handlers"
 )
 
 const (
 	port = ":3000"
 )
 
-func helloWorld(w http.ResponseWriter, r *http.Request)  {
-	fmt.Fprintf(w, "Hello world\n")
-}
 
 func main() {
-	http.HandleFunc("/", helloWorld)
+	for path, handler := range handlers.Handlers {
+		http.HandleFunc(path, handler)
+	}
+	
 	fmt.Println("Server is running at localhost:", port)
 	log.Fatal(http.ListenAndServe(port, nil))
 }
