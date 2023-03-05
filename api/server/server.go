@@ -14,7 +14,7 @@ func Run(addr string) error {
 		log.Fatal(err)
 	}
 
-	for path, handler := range handlers.NewHandler(prd).Handlers {
+	for path, handler := range handlers.NewHandler(prd).Routes {
 		http.HandleFunc(path, handler)
 	}
 

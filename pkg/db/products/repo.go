@@ -25,6 +25,7 @@ func NewRepo() (*productsRepo, error) {
 	}, nil
 }
 
+
 func (p *productsRepo) GetAll() ([]model.Product, error) {
 	var produts []model.Product
 	rows, err := p.db.Query("select id, name, inventory, price from products")
