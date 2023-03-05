@@ -1,2 +1,5 @@
 serve:
-	go run main.go
+	go run cmd/server.go
+
+format:
+	go fmt ./...
