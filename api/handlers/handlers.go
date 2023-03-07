@@ -9,19 +9,13 @@ import (
 )
 
 type Handler struct {
-	Routes map[string]func(http.ResponseWriter, *http.Request)
-
 	products products.Repo
 }
 
-func NewHandler(products products.Repo) *Handler {
-	handler := &Handler{
+func New(products products.Repo) *Handler {
+	return &Handler{
 		products: products,
 	}
-
-	attachHandlers(handler)
-
-	return handler
 }
 
 func (h *Handler) home(w http.ResponseWriter, r *http.Request) {
@@ -36,11 +30,4 @@ func (h *Handler) getProducts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(prs)
-}
-
-func attachHandlers(h *Handler) {
-	h.Routes = map[string]func(http.ResponseWriter, *http.Request){
-		"/":         h.home,
-		"/products": h.getProducts,
-	}
 }
